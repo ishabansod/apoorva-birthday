@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Thy Friends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .crossword {
+            display: grid;
+            grid-template-columns: repeat(15, 30px);
+            gap: 1px;
+            margin: 20px auto;
+            justify-content: center; /* Centers the grid horizontally */
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            background-color: #eee;
+            text-align: center;
+            font-size: 18px;
+            position: relative;
+        }
+        .cell input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            /* border: none; */
+            font-size: 18px;
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margins */
+            box-sizing: border-box; /* Ensure dimensions include borders */
+        }
+        .cell input:focus {
+            outline: none;
+            background-color: #ffffcc;
+        }
+        .cell.block {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #555;
+        }
+        .number {
+            font-size: 10px;
+            vertical-align: top;
+            text-align: left;
+            margin-left: 2px;
+            position: absolute;
+            color: #555;
+        }
+        .clues {
+            margin-top: 10px;
+            text-align: left;
+            color: #fff;
+        }
+        .clues-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            text-align: left;
+        }
+        .clues h2 {
+            margin: 5px 0;
+        }
+        .clues ul {
+            padding-left: 20px;
+        }
+        .buttons {
+            margin: 10px 0;
+        }
+        .buttons button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .buttons button:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Know Thy Friends</h1>
+        <div class="crossword">
+            <!-- Row 1 -->
+
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><span class="number">1</span><input type="text" maxlength="1"></div>
+            <div class="cell"><span class="number">2</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <!-- Continue the grid with all rows and cells -->
+
+            <!-- Row 2 -->
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 3 -->
+            <div class="cell"><span class="number">3</span><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><span class="number">4</span><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><span class="number">5</span><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 4 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 5 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 6 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+
+            
+            <!-- Row 7 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><span class="number">6</span><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><span class="number">7</span><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 8 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 9 -->
+            <div class="cell"><span class="number">8</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+
+            <!-- Row 10 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 11 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 12 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 13 -->
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><span class="number">9</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 14 -->
+            <div class="cell"><span class="number">10</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+            <!-- Row 15 -->
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+            <div class="cell block"></div>
+
+
+        </div>
+        <div class="buttons">
+            <button onclick="resetPuzzle()">Reset</button>
+            <button onclick="checkAnswers()">Check Answers</button>
+        </div>
+        <div class="clues-container">
+            <div class="clues">
+                <h2>Across</h2>
+                <ul style="list-style-type:none;">
+                    <li>1. How many drawers did we paint in Vysakh's
+                        house?(4)</li>
+                    <li>8. What is Ashwerya's favourite book? (15)</li>
+                    <li>9. How does Tanvi like their beer? (4)</li>
+                    <li>10. What is Joel's hometown? (5)</li>
+                </ul>
+            </div>
+            <div class="clues">
+                <h2>Down</h2>
+                <ul style="list-style-type:none;">
+                    <li>2. How long has Joel dated Rhea for? (15)</li>
+                    <li>3. Who did Isha date for two weeks? (12)</li>
+                    <li>4. What is Tanvi's lizard's name in Pune? (10)</li>
+                    <li>5. What is Isha mildly allergic to? (7)</li>
+                    <li>6. What is Vysakh's sister's name? (7)</li>
+                    <li>7. What is Ashwerya's fake sun sign? (5)</li>
+                </ul>
+            </div>
+        </div>
+
+    <script>
+        function resetPuzzle() {
+            const inputs = document.querySelectorAll('.cell input');
+            inputs.forEach(input => input.value = '');
+            inputs.forEach(input => input.style.backgroundColor = "#eee");
+        }
+
+        const correctAnswers = [
+        "F",     "O",     "U",     "R",     "N",     "H",     
+        "R",     "E",     "P",     "A",     "O",     "Y",     
+        "E",     "R",     "C",     "E",     "A",  
+        "S",     "K",     "A",     "N",  
+        "H",     "Y",     "N",     "V",     "R",     "U",  
+        "M",     "J",     "E",     "I",     "O",     "T",  
+        "A",     "L",     "I",     "T",     "T",     "L",     
+        "E",     "P",     "R",     "I",     "N",     "C",     
+        "E",     "S",     "S",     "L",     "G",     "R",     
+        "G",     "E",     "A",     "A",     "A",     "O",     
+        "M",     "P",     "R",     "J",     "O",     "U",     
+        "W",     "A",     "R",     "M",     "N",     "R",    
+        "A",     "N",     "N",     "I",     "T",     "H",     
+        ];
+
+        function checkAnswers() {
+            const inputs = document.querySelectorAll('.cell input');
+            let correctCount = 0;
+
+
+            inputs.forEach((input, index) => {
+                const correctValue = correctAnswers[index];
+                const userValue = input.value.toUpperCase(); // Convert to uppercase
+
+                if (userValue === correctValue) {
+                    input.style.backgroundColor = "#90EE90"; // Light green for correct
+                    correctCount++;
+                } else {
+                    input.style.backgroundColor = "#FFB6C1"; // Light red for incorrect
+                }
+            });
+
+            if (correctCount === correctAnswers.filter(a => a !== "").length) {
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = 0;
+                overlay.style.left = 0;
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                overlay.style.color = 'white';
+                overlay.style.display = 'flex';
+                overlay.style.flexDirection = 'column';
+                overlay.style.alignItems = 'center';
+                overlay.style.justifyContent = 'center';
+                overlay.style.zIndex = 1000;
+
+                // Add message
+                const message = document.createElement('div');
+                message.style.fontSize = '2rem';
+                message.style.marginBottom = '20px';
+                message.textContent = "Wohoooo! You got all the answers correct 😉! But are you closer to your gift??... you never know.";
+                overlay.appendChild(message);
+
+                // Add countdown
+                const countdown = document.createElement('div');
+                countdown.style.fontSize = '1.5rem';
+                countdown.textContent = "Redirecting in 10 seconds...";
+                overlay.appendChild(countdown);
+
+                document.body.appendChild(overlay);
+
+                // Countdown timer
+                let timeLeft = 10;
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    countdown.textContent = `Redirecting in ${timeLeft} seconds...`;
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        window.location.href = 'final.html'; // Replace 'nextpage.html' with your target page
+                    }
+                }, 1000);
+            }
+        }
+
+    </script>
+</body>
+</html>

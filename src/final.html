@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloons Celebration</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #fdf8e4;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        h1 {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            color: #ff4081;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            width: auto;
+            height: auto;
+            opacity: 1; /* Adjust opacity to blend with the balloons */
+        }
+
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1; /* Ensures balloons are above the background image */
+        }
+
+        .balloon:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 3px;
+            height: 20px;
+            background: #555;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <h1>Pop the balloons for fun!</h1>
+    <img src="gift_card_image.png" alt="Background Image" class="background-image">
+    <div id="container"></div>
+    <script>
+        const container = document.getElementById('container');
+        const balloons = [];
+        const initialBalloonCount = 50;
+        const popSound = new Audio('pop.mp3');
+        const luckySound = new Audio('lucky.mp3');
+
+        // Balloon class
+        class Balloon {
+            constructor() {
+                this.element = document.createElement('div');
+                this.element.className = 'balloon';
+                this.element.style.background = this.getRandomColor();
+                this.element.style.left = `${Math.random() * 100}vw`;
+                this.element.style.top = `${Math.random() * 100}vh`;
+
+                // Assign random directions for xSpeed and ySpeed
+                this.xSpeed = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1);
+                this.ySpeed = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1);
+
+                this.element.addEventListener('click', () => this.pop());
+                container.appendChild(this.element);
+                balloons.push(this);
+            }
+
+            getRandomColor() {
+                const colors = ['#ff4081', '#4caf50', '#2196f3', '#ffeb3b', '#9c27b0', '#ff5722', '#03a9f4'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            move() {
+                const rect = this.element.getBoundingClientRect();
+                const maxWidth = window.innerWidth - rect.width;
+                const maxHeight = window.innerHeight - rect.height;
+
+                let newX = rect.left + this.xSpeed;
+                let newY = rect.top + this.ySpeed;
+
+                if (newX <= 0 || newX >= maxWidth) this.xSpeed *= -1;
+                if (newY <= 0 || newY >= maxHeight) this.ySpeed *= -1;
+
+                this.element.style.left = `${Math.min(maxWidth, Math.max(0, newX))}px`;
+                this.element.style.top = `${Math.min(maxHeight, Math.max(0, newY))}px`;
+            }
+
+            pop() {
+                this.element.remove();
+                popSound.play();
+                this.createNewBalloon();
+            }
+
+            createNewBalloon() {
+                new Balloon();
+            }
+        }
+
+        // Create initial balloons
+        for (let i = 0; i < initialBalloonCount; i++) {
+            new Balloon();
+        }
+
+        // Animate balloons
+        function animate() {
+            balloons.forEach(balloon => {
+                if (balloon.element.isConnected) {
+                    balloon.move();
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

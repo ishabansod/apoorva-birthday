@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Congratulations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: black;
+            color: yellow;
+        }
+        #counter {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Congratulations!</h1>
+    <p>You've successfully completed Pac-Man!</p>
+    <p></p>
+    <p>but.... it's not over yet.. </p>
+    <p>WUHAHAHAHAA!!!! </p>
+    <p>Redirecting to the next one in <span id="counter">10</span> seconds...</p>
+
+    <script>
+        // Preload the audio
+        const audio = new Audio('lucky.mp3'); // Replace with your audio file path
+        audio.preload = "auto";
+
+        let counter = 10; // Initialize counter
+        const counterElement = document.getElementById('counter');
+
+        // Countdown logic
+        const countdown = setInterval(() => {
+            counter--;
+            counterElement.textContent = counter;
+
+            // Play audio when counter hits 9
+            if (counter === 9) {
+                audio.play().catch(error => {
+                    console.error("Audio playback failed:", error);
+                });
+            }
+
+            // Redirect when the counter reaches 0
+            if (counter === 0) {
+                clearInterval(countdown);
+                window.location.href = "crossword.html"; // Replace with the desired URL
+            }
+        }, 1000); // Update every 1 second
+    </script>
+</body>
+</html>

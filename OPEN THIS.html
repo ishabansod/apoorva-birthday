@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Fun</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #fdf8e4;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            color: #ff4081;
+        }
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        .balloon:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 3px;
+            height: 20px;
+            background: #555;
+            transform: translateX(-50%);
+        }
+        .hidden {
+            display: none;
+        }
+        .lucky-balloon {
+            background: radial-gradient(circle, #ff0000, #cc0000); /* Red gradient */
+        }
+    </style>
+</head>
+<body>
+    <h1>Pop the balloons to find your gift!</h1>
+    <div id="container"></div>
+    <script>
+        const container = document.getElementById('container');
+        const balloonCount = 40; // Total balloons
+        const balloons = [];
+        let linkRevealed = false;
+        let chaosLevel = 1; // Balloons speed multiplier
+
+        // Add audio for popping sounds
+        const popSound = new Audio('src/pop.mp3'); // Replace with the path to your pop sound
+        const luckySound = new Audio('src/lucky.mp3'); // Replace with the path to your lucky balloon sound
+
+        // Balloon object constructor
+        class Balloon {
+            constructor(isLucky) {
+                this.element = document.createElement('div');
+                this.element.className = 'balloon';
+                if (isLucky) {
+                    this.element.classList.add('lucky-balloon');
+                } else {
+                    this.element.style.background = this.getRandomColor();
+                }
+                this.element.style.left = `${Math.random() * 100}vw`;
+                this.element.style.top = `${Math.random() * 100}vh`;
+                this.xSpeed = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1); // Random horizontal speed
+                this.ySpeed = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1); // Random vertical speed
+                this.element.addEventListener('click', () => this.pop());
+                container.appendChild(this.element);
+                balloons.push(this);
+            }
+
+            getRandomColor() {
+                const colors = ['#ff4081', '#4caf50', '#2196f3', '#ffeb3b', '#9c27b0', '#ff5722', '#ff0000'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            move() {
+                const rect = this.element.getBoundingClientRect();
+                const maxWidth = window.innerWidth - rect.width;
+                const maxHeight = window.innerHeight - rect.height;
+
+                // Update position
+                let newX = rect.left + this.xSpeed;
+                let newY = rect.top + this.ySpeed;
+
+                // Check for collisions with screen edges
+                if (newX <= 0 || newX >= maxWidth) this.xSpeed *= -1; // Reverse horizontal direction
+                if (newY <= 0 || newY >= maxHeight) this.ySpeed *= -1; // Reverse vertical direction
+
+                // Apply new position
+                this.element.style.left = `${Math.min(maxWidth, Math.max(0, newX))}px`;
+                this.element.style.top = `${Math.min(maxHeight, Math.max(0, newY))}px`;
+            }
+
+            pop() {
+                if (this.element.classList.contains('lucky-balloon') && !linkRevealed) {
+                    linkRevealed = true;
+                    popSound.play();
+                    luckySound.play(); // Play lucky balloon sound
+                    revealLink();
+                } else {
+                    this.element.classList.add('hidden');
+                    chaosLevel += 0.1; // Increase speed for other balloons
+                    popSound.play(); // Play regular pop sound
+                }
+            }
+        }
+
+        // Create balloons
+        const luckyBalloonIndex = Math.floor(Math.random() * balloonCount);
+        for (let i = 0; i < balloonCount; i++) {
+            new Balloon(i === luckyBalloonIndex);
+        }
+
+        // Move balloons at each animation frame
+        function animate() {
+            balloons.forEach(balloon => {
+                if (!balloon.element.classList.contains('hidden')) {
+                    balloon.move();
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate(); // Start animation loop
+
+        function revealLink() {
+            const link = document.createElement('a');
+            link.href = "src/pacman.html"; // Replace with your link
+            link.innerText = "🎉 Yayyy! You found the balloon! Click here for what's nexttt 🎉";
+            link.style.position = 'fixed';
+            link.style.top = '50%';
+            link.style.left = '50%';
+            link.style.transform = 'translate(-50%, -50%)';
+            link.style.fontSize = '2rem';
+            link.style.backgroundColor = '#fff';
+            link.style.padding = '10px 20px';
+            link.style.color = '#ff4081';
+            link.style.border = '2px solid #e91e63';
+            link.style.borderRadius = '10px';
+            link.style.textDecoration = 'none';
+            document.body.appendChild(link);
+        }
+    </script>
+</body>
+</html>
